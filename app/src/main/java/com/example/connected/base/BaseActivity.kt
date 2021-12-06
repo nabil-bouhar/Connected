@@ -19,7 +19,7 @@ import com.example.connected.databinding.BottomNavigationBarBinding
 import com.example.connected.databinding.LoginFormBinding
 import com.example.connected.databinding.RegisterFormBinding
 import com.example.connected.databinding.ToolbarBinding
-import com.example.connected.following.FollowingActivity
+import com.example.connected.relations.RelationsActivity
 import com.example.connected.home.HomeActivity
 import com.example.connected.messages.MessagesActivity
 import com.example.connected.profile.ProfileActivity
@@ -60,8 +60,8 @@ open class BaseActivity : AppCompatActivity() {
                 R.id.navigation_home -> {
                     Intent(this, HomeActivity::class.java)
                 }
-                R.id.navigation_following -> {
-                    Intent(this, FollowingActivity::class.java)
+                R.id.navigation_relations -> {
+                    Intent(this, RelationsActivity::class.java)
                 }
                 R.id.navigation_profile -> {
                     Intent(this, ProfileActivity::class.java)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".following.FollowingActivity">
+    tools:context=".relations.RelationsActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -14,11 +14,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
+        android:backgroundTint="?attr/baseColor"
         android:id="@+id/tl_relations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:tabMode="scrollable" />
+        app:tabGravity="center"
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/customTabLayout" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_relations"

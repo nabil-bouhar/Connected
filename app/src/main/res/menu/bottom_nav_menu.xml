@@ -12,9 +12,9 @@
         android:title="@string/title_messages" />
 
     <item
-        android:id="@+id/navigation_following"
+        android:id="@+id/navigation_relations"
         android:icon="@drawable/ic_user_friends_svgrepo_com"
-        android:title="@string/title_following" />
+        android:title="@string/title_relations" />
 
     <item
         android:id="@+id/navigation_profile"
