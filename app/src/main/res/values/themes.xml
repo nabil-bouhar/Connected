@@ -6,6 +6,7 @@
         <item name="baseColor">@color/cyan</item>
         <item name="backgroundColor">@color/white</item>
         <item name="undersideColor">@color/light_gray</item>
+        <item name="primaryColor">@color/dark_gray</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/baseColor</item>
@@ -13,5 +14,7 @@
         <!-- Font -->
         <item name="android:fontFamily">sans-serif-condensed</item>
 
+        <!-- disable animation on activity launch -->
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 </resources>

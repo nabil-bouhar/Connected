@@ -3,4 +3,5 @@
     <attr name="baseColor" format="color" />
     <attr name="backgroundColor" format="color" />
     <attr name="undersideColor" format="color" />
+    <attr name="primaryColor" format="color" />
 </resources>

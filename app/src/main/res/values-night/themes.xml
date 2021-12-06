@@ -12,5 +12,8 @@
 
         <!-- font -->
         <item name="android:fontFamily">sans-serif-condensed</item>
+
+        <!-- disable animation on activity launch -->
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 </resources>
