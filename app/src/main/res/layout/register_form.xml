@@ -1,148 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp">
+    android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="?attr/baseColor"
-        android:indeterminate="true"
-        android:indeterminateTint="?attr/baseColor"
-        android:max="100"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="5dp">
 
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="25dp"
-        android:contentDescription="@string/logo"
-        android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressbar" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:textColor="@color/design_default_color_error"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_pseudo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="@string/pseudo_input_hint"
-        app:boxStrokeColor="?attr/baseColor"
-        app:endIconMode="clear_text"
-        app:hintTextColor="?attr/baseColor"
-        app:layout_constraintTop_toBottomOf="@id/tv_error"
-        app:startIconContentDescription="@string/content_description_end_icon"
-        app:startIconDrawable="@drawable/ic_user_svgrepo_com">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_pseudo"
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textCursorDrawable="@drawable/cursor_color" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:backgroundTint="?attr/baseColor"
+            android:indeterminate="true"
+            android:indeterminateTint="?attr/baseColor"
+            android:max="100"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email_address_input_hint"
-        app:boxStrokeColor="?attr/baseColor"
-        app:endIconMode="clear_text"
-        app:hintTextColor="?attr/baseColor"
-        app:layout_constraintTop_toBottomOf="@id/til_pseudo"
-        app:startIconContentDescription="@string/content_description_end_icon"
-        app:startIconDrawable="@drawable/ic_baseline_email_24">
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="25dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressbar" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_mail"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textCursorDrawable="@drawable/cursor_color" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/img_logo" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password_input_hint"
-        app:boxStrokeColor="?attr/baseColor"
-        app:endIconMode="password_toggle"
-        app:hintTextColor="?attr/baseColor"
-        app:layout_constraintTop_toBottomOf="@id/til_mail"
-        app:startIconContentDescription="@string/content_description_end_icon"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
+        <RadioGroup
+            android:id="@+id/rb_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textCursorDrawable="@drawable/cursor_color" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:checkedButton="@+id/rb_male"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tv_error">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_re_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/re_password_input_hint"
-        app:boxStrokeColor="?attr/baseColor"
-        app:endIconMode="password_toggle"
-        app:hintTextColor="?attr/baseColor"
-        app:layout_constraintTop_toBottomOf="@id/til_password"
-        app:startIconContentDescription="@string/content_description_end_icon"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+            <TextView
+                android:id="@+id/rb_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_re_password"
+            <RadioButton
+                android:id="@+id/rb_male"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/male"
+                app:buttonTint="?attr/baseColor" />
+
+            <RadioButton
+                android:id="@+id/rb_female"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/female"
+                app:buttonTint="?attr/baseColor"
+                app:useMaterialThemeColors="false" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textCursorDrawable="@drawable/cursor_color" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="15dp"
+            android:hint="@string/name_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="clear_text"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/rb_gender"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_name_24">
 
-    <Button
-        android:id="@+id/btn_register"
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="?attr/baseColor"
-        android:text="@string/register"
-        app:icon="@drawable/ic_register_svgrepo_com"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_re_password" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_go_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="?attr/backgroundColor"
-        android:text="@string/already_member"
-        android:textColor="?attr/primaryColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_birth_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/birth_date_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="clear_text"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/til_name"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_birthday_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_pseudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pseudo_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="clear_text"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/til_birth_date"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_user_svgrepo_com">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_pseudo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_contact_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/contact_no_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="clear_text"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/til_pseudo"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_baseline_phone_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_contact_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_address_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="clear_text"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/til_contact_no"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_baseline_email_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/til_mail"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_re_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/re_password_input_hint"
+            app:boxStrokeColor="?attr/baseColor"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="?attr/baseColor"
+            app:layout_constraintTop_toBottomOf="@id/til_password"
+            app:startIconContentDescription="@string/content_description_end_icon"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_re_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_register"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="?attr/baseColor"
+            android:text="@string/register"
+            app:icon="@drawable/ic_register_svgrepo_com"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_re_password" />
+
+        <Button
+            android:id="@+id/btn_go_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="?attr/backgroundColor"
+            android:text="@string/already_member"
+            android:textColor="?attr/primaryColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

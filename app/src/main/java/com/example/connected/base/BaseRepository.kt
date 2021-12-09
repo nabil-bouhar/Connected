@@ -1,58 +1,22 @@
 package com.example.connected.base
 
-import com.example.connected.R
 import com.example.connected.app.ConnectedApp
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 
-class BaseRepository {
+
+open class BaseRepository {
 
     companion object {
-        private val repoInstance: BaseRepository = BaseRepository()
-
-        fun getInstance(): BaseRepository {
-            return repoInstance
-        }
+        const val USERS_COLLECTION = "users"
+        const val MESSAGES_COLLECTION = "messages"
     }
 
-    fun performUserLogInAction(
-        email: String,
-        password: String,
-        userAuthenticationCallBack: UserAuthenticationCallBack
-    ) {
-        ConnectedApp.auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    userAuthenticationCallBack.onUserLogInSuccessful()
-                } else {
-                    userAuthenticationCallBack.onUserLogInError(
-                        it.exception?.message
-                            ?: ConnectedApp.appContext.getString(R.string.unknown_error)
-                    )
-                }
-            }
+    protected fun getCurrentUserUid(): String? {
+        return ConnectedApp.auth.currentUser?.uid
     }
 
-    fun performUserSignUpAction(
-        email: String,
-        password: String,
-        userAuthenticationCallBack: UserAuthenticationCallBack
-    ) {
-        ConnectedApp.auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    userAuthenticationCallBack.onUserSignUpSuccessful()
-                } else {
-                    userAuthenticationCallBack.onUserSignUpError(
-                        it.exception?.message
-                            ?: ConnectedApp.appContext.getString(R.string.unknown_error)
-                    )
-                }
-            }
-    }
-
-    interface UserAuthenticationCallBack {
-        fun onUserLogInSuccessful()
-        fun onUserLogInError(errorMessage: String)
-        fun onUserSignUpSuccessful()
-        fun onUserSignUpError(errorMessage: String)
+    protected fun getCollection(collectionName: String): CollectionReference {
+        return FirebaseFirestore.getInstance().collection(collectionName)
     }
 }

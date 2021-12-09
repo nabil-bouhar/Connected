@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_followers__24.xml" value="0.12708333333333333" />
         <entry key="app/src/main/res/drawable/ic_following_24.xml" value="0.12708333333333333" />
+        <entry key="app/src/main/res/drawable/ic_like_icon_svg.xml" value="0.20358974358974358" />
         <entry key="app/src/main/res/drawable/ic_login_svgrepo_com.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_user_svgrepo_com.xml" value="0.13645833333333332" />
@@ -18,7 +19,7 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_messages.xml" value="0.21145833333333333" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_relations.xml" value="0.11041666666666666" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/bottom_navigation_bar.xml" value="0.22552083333333334" />
@@ -32,7 +33,7 @@
         <entry key="app/src/main/res/layout/friends_fragment.xml" value="0.11041666666666666" />
         <entry key="app/src/main/res/layout/login_form.xml" value="0.33" />
         <entry key="app/src/main/res/layout/login_from.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/register_form.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/register_form.xml" value="0.33" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.14" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
       </map>

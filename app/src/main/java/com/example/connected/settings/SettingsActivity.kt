@@ -1,5 +1,6 @@
 package com.example.connected.settings
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.connected.R
@@ -28,12 +29,26 @@ class SettingsActivity : BaseActivity() {
 
     private fun setListener() {
         binding.clLogOut.setOnClickListener {
-            ConnectedApp.auth.signOut()
-            ConnectedUtils.changeActivityAndClearStack(
-                this@SettingsActivity,
-                HomeActivity::class.java,
-                null
-            )
+            AlertDialog.Builder(this@SettingsActivity)
+                .setMessage(getString(R.string.log_out_conf_mess))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    logOut()
+                }
+                .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
         }
+    }
+
+    private fun logOut() {
+        ConnectedApp.auth.signOut()
+        ConnectedUtils.changeActivityAndClearStack(
+            this@SettingsActivity,
+            HomeActivity::class.java,
+            null
+        )
     }
 }

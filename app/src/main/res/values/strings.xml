@@ -36,4 +36,21 @@
     <string name="followers">Followers</string>
     <string name="friends">Friends</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="likes">likes</string>
+    <string name="name_input_hint">Your full name</string>
+    <string name="birth_date_input_hint">Your birth date</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="gender">Gender :</string>
+    <string name="invalid_name">Invalid Name</string>
+    <string name="invalid_pseudo">Invalid pseudonym ! (use letters, numbers, underscore and hyphen only)</string>
+    <string name="passwords_do_not_match">Your passwords do not match !</string>
+    <string name="contact_no_input_hint">Your phone number</string>
+    <string name="invalid_contact_no">Invalid phone number !</string>
+    <string name="empty_field_in_form_message">Please fill in all fields !</string>
+    <string name="log_out_conf_mess">"Are you sure you want to log out? "</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="about_default_mesage">Hi there ! I am using Connected.</string>
 </resources>
