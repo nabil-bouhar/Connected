@@ -2,27 +2,17 @@ package com.example.connected.authentication
 
 import com.example.connected.R
 import com.example.connected.app.ConnectedApp
+import com.example.connected.base.BaseRepository
 import com.example.connected.models.User
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
 
-class UserAuthenticationRepository {
+class UserAuthenticationRepository : BaseRepository() {
 
     companion object {
         private val REPO_INSTANCE: UserAuthenticationRepository = UserAuthenticationRepository()
-        private const val COLLECTION_NAME = "users"
 
         fun getInstance(): UserAuthenticationRepository {
             return REPO_INSTANCE
         }
-    }
-
-    private fun getCurrentUserUid(): String? {
-        return ConnectedApp.auth.currentUser?.uid
-    }
-
-    private fun getUsersCollection(): CollectionReference {
-        return FirebaseFirestore.getInstance().collection(COLLECTION_NAME)
     }
 
     private fun createUserInFireStore(
@@ -30,7 +20,7 @@ class UserAuthenticationRepository {
         userAuthenticationCallBack: UserAuthenticationCallBack
     ) {
         getCurrentUserUid()?.let {
-            getUsersCollection().document(it).set(user).addOnCompleteListener { task ->
+            getCollection(USERS_COLLECTION).document(it).set(user).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     userAuthenticationCallBack.onUserLogInSuccessful(it)
                 } else {
@@ -84,7 +74,6 @@ class UserAuthenticationRepository {
                         pseudo,
                         contactNo,
                         email,
-                        password,
                         "default",
                         "default",
                         "default",

@@ -151,7 +151,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_contact_us"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/cl_theme">
 
@@ -192,7 +192,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_terms_and_conditions"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/cl_contact_us">
 
@@ -233,7 +233,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_log_out"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/cl_terms_and_conditions">
 

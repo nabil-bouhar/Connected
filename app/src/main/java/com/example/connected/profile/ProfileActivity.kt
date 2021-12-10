@@ -31,10 +31,14 @@ class ProfileActivity : BaseActivity() {
     private fun setObservers() {
         profileViewModel.let {
             it.loading.observe(this, { loading ->
-                if (loading) {
-                    activityProfileBinding.profileProgressBar.visibility = View.VISIBLE
-                } else {
-                    activityProfileBinding.profileProgressBar.visibility = View.GONE
+                activityProfileBinding.apply {
+                    if (loading) {
+                        profileProgressBar.visibility = View.VISIBLE
+                        clProfile.visibility = View.GONE
+                    } else {
+                        profileProgressBar.visibility = View.GONE
+                        clProfile.visibility = View.VISIBLE
+                    }
                 }
             })
             it.userInfo.observe(this, { user ->
