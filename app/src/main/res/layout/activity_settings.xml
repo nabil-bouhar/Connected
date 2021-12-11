@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="@string/edit_my_profile"
+            android:text="@string/edit_account_info"
             android:textSize="17sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"

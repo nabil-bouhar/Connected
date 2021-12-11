@@ -38,6 +38,7 @@ class UserAuthenticationViewModel : ViewModel(),
         gender: Boolean,
         name: String,
         birthDate: String,
+        location: String,
         pseudo: String,
         contactNo: String,
         email: String,
@@ -45,39 +46,44 @@ class UserAuthenticationViewModel : ViewModel(),
         password2: String
     ) {
         if (ConnectedUtils.filterValidateName(name)) {
-            if (ConnectedUtils.filterValidatePseudonym(pseudo)) {
-                if (ConnectedUtils.filterValidatePhoneNumber(contactNo)) {
-                    if (ConnectedUtils.filterValidateEmail(email)) {
-                        if (ConnectedUtils.filterValidatePassword(password1)) {
-                            if (password1 == password2) {
-                                userAuthenticationRepository.performUserSignUpAction(
-                                    ConnectedUtils.booleanToInt(gender),
-                                    name,
-                                    ConnectedUtils.convertDateToLong(birthDate),
-                                    pseudo,
-                                    contactNo,
-                                    email,
-                                    password1,
-                                    userAuthenticationCallBack
-                                )
+            if (ConnectedUtils.filterValidateCity(location)) {
+                if (ConnectedUtils.filterValidatePseudonym(pseudo)) {
+                    if (ConnectedUtils.filterValidatePhoneNumber(contactNo)) {
+                        if (ConnectedUtils.filterValidateEmail(email)) {
+                            if (ConnectedUtils.filterValidatePassword(password1)) {
+                                if (password1 == password2) {
+                                    userAuthenticationRepository.performUserSignUpAction(
+                                        ConnectedUtils.booleanToInt(gender),
+                                        name,
+                                        ConnectedUtils.convertDateToLong(birthDate),
+                                        location,
+                                        pseudo,
+                                        contactNo,
+                                        email,
+                                        password1,
+                                        userAuthenticationCallBack
+                                    )
+                                } else {
+                                    signUpError.value =
+                                        ConnectedApp.appContext.getString(R.string.passwords_do_not_match)
+                                }
                             } else {
                                 signUpError.value =
-                                    ConnectedApp.appContext.getString(R.string.passwords_do_not_match)
+                                    ConnectedApp.appContext.getString(R.string.invalid_password)
                             }
                         } else {
                             signUpError.value =
-                                ConnectedApp.appContext.getString(R.string.invalid_password)
+                                ConnectedApp.appContext.getString(R.string.invalid_email)
                         }
                     } else {
                         signUpError.value =
-                            ConnectedApp.appContext.getString(R.string.invalid_email)
+                            ConnectedApp.appContext.getString(R.string.invalid_contact_no)
                     }
                 } else {
-                    signUpError.value =
-                        ConnectedApp.appContext.getString(R.string.invalid_contact_no)
+                    signUpError.value = ConnectedApp.appContext.getString(R.string.invalid_pseudo)
                 }
             } else {
-                signUpError.value = ConnectedApp.appContext.getString(R.string.invalid_pseudo)
+                signUpError.value = ConnectedApp.appContext.getString(R.string.invalid_location)
             }
         } else {
             signUpError.value = ConnectedApp.appContext.getString(R.string.invalid_name)

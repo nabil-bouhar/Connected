@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/bottom_nav_bar_color_selector.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/cursor_color.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/ic_edit_50.xml" value="0.2517948717948718" />
         <entry key="app/src/main/res/drawable/ic_followers__24.xml" value="0.12708333333333333" />
         <entry key="app/src/main/res/drawable/ic_following_24.xml" value="0.12708333333333333" />
         <entry key="app/src/main/res/drawable/ic_like_icon_svg.xml" value="0.20358974358974358" />
@@ -19,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_messages.xml" value="0.21145833333333333" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_relations.xml" value="0.11041666666666666" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/bottom_navigation_bar.xml" value="0.22552083333333334" />

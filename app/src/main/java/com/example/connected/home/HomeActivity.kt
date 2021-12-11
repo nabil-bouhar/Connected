@@ -20,7 +20,6 @@ import com.example.connected.utils.ConnectedUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 
-
 class HomeActivity : BaseActivity() {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -93,6 +92,7 @@ class HomeActivity : BaseActivity() {
                         rbFemale.isChecked,
                         etName.text.toString(),
                         etBirthDate.text.toString(),
+                        etLocation.text.toString(),
                         etPseudo.text.toString(),
                         etContactNo.text.toString(),
                         etMail.text.toString(),
@@ -129,6 +129,7 @@ class HomeActivity : BaseActivity() {
         return with(registerFormBinding) {
             TextUtils.isEmpty(etName.text)
                     || TextUtils.isEmpty(etBirthDate.text.toString())
+                    || TextUtils.isEmpty(etLocation.text.toString())
                     || TextUtils.isEmpty(etPseudo.text.toString())
                     || TextUtils.isEmpty(etContactNo.text.toString())
                     || TextUtils.isEmpty(etMail.text.toString())

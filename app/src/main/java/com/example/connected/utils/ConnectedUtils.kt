@@ -8,6 +8,7 @@ import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.math.abs
 
 object ConnectedUtils {
 
@@ -17,9 +18,15 @@ object ConnectedUtils {
         Pattern.compile("^([ \\u00c0-\\u01ffa-zA-Z'\\-])+\$")
     private val PSEUDONYM_PATTERN: Pattern =
         Pattern.compile("([A-Za-z0-9_-]+)")
+    private val CITY_PATTERN: Pattern =
+        Pattern.compile("^[a-zA-Z]+(?:[s-][a-zA-Z]+)*\$")
 
     fun filterValidateName(name: String): Boolean {
         return NAME_PATTERN.matcher(name).matches()
+    }
+
+    fun filterValidateCity(city: String): Boolean {
+        return CITY_PATTERN.matcher(city).matches()
     }
 
     fun filterValidatePseudonym(pseudo: String): Boolean {
@@ -78,6 +85,10 @@ object ConnectedUtils {
 
     fun getBirthMaxDate(): Long {
         return System.currentTimeMillis() - ONE_YEAR_IN_MILLIS
+    }
+
+    fun getNumberOfYearsBetweenTwoDates(date1: Long, date2: Long): Int {
+        return abs((date1 - date2) / ONE_YEAR_IN_MILLIS).toInt()
     }
 
     fun booleanToInt(boolean: Boolean): Int {
