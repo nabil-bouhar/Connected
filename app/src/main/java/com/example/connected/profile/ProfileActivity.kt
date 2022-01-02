@@ -14,6 +14,7 @@ import com.example.connected.R
 import com.example.connected.base.BaseActivity
 import com.example.connected.databinding.ActivityProfileBinding
 import com.example.connected.models.User
+import com.example.connected.utils.ConnectedUtils
 import com.squareup.picasso.Picasso
 
 class ProfileActivity : BaseActivity() {
@@ -105,7 +106,7 @@ class ProfileActivity : BaseActivity() {
     private fun displayUserInfo(user: User) {
         activityProfileBinding.apply {
             tvDisplayName.text = user.pseudo
-            tvAge.text = profileViewModel.getUserAge(user.birthDate!!)
+            tvAge.text = ConnectedUtils.getUserAge(user.birthDate!!)
             tvLocation.text = user.city
             tvLikes.text = user.likes!!.size.toString()
             tvFollowing.text = user.following!!.size.toString()

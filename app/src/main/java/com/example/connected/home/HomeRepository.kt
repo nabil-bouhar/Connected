@@ -1,6 +1,11 @@
 package com.example.connected.home
 
-class HomeRepository {
+import com.example.connected.R
+import com.example.connected.app.ConnectedApp
+import com.example.connected.base.BaseRepository
+import com.example.connected.models.User
+
+class HomeRepository : BaseRepository() {
 
     companion object {
         private val REPO_INSTANCE: HomeRepository = HomeRepository()
@@ -8,5 +13,27 @@ class HomeRepository {
         fun getInstance(): HomeRepository {
             return REPO_INSTANCE
         }
+    }
+
+    fun loadUsersListFromFireStore(usersCallback: UsersCallback) {
+        val usersList: MutableList<User> = ArrayList()
+        getCollection(USERS_COLLECTION).get()
+            .addOnSuccessListener { users ->
+                users.forEach {
+                    usersList.add(it.toObject(User::class.java))
+                }
+                usersCallback.onReceivedUsersList(usersList)
+            }
+            .addOnFailureListener {
+                usersCallback.onErrorReceivingUsersList(
+                    it.message
+                        ?: ConnectedApp.appContext.getString(R.string.unknown_error)
+                )
+            }
+    }
+
+    interface UsersCallback {
+        fun onReceivedUsersList(users: MutableList<User>)
+        fun onErrorReceivingUsersList(error: String)
     }
 }

@@ -3,10 +3,7 @@ package com.example.connected.profile
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.connected.R
-import com.example.connected.app.ConnectedApp
 import com.example.connected.models.User
-import com.example.connected.utils.ConnectedUtils
 
 class ProfileViewModel : ViewModel(), UserInfoCallBack {
 
@@ -19,11 +16,6 @@ class ProfileViewModel : ViewModel(), UserInfoCallBack {
 
     fun getUserData() {
         profileRepository.getUserDataFromFireStore(userInfoCallBack)
-    }
-
-    fun getUserAge(dob: Long): String {
-        return ConnectedUtils.getNumberOfYearsBetweenTwoDates(System.currentTimeMillis(), dob)
-            .toString() + " " + ConnectedApp.appContext.getString(R.string.years)
     }
 
     fun updateProfilePicture(image: Uri) {

@@ -57,4 +57,5 @@
     <string name="invalid_location">Invalid city name !</string>
     <string name="years">Years</string>
     <string name="select_photo_intent_title">Please select a photo</string>
+    <string name="you_may_know">You May know</string>
 </resources>

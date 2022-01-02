@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import com.example.connected.R
+import com.example.connected.app.ConnectedApp
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -89,6 +91,11 @@ object ConnectedUtils {
 
     fun getNumberOfYearsBetweenTwoDates(date1: Long, date2: Long): Int {
         return abs((date1 - date2) / ONE_YEAR_IN_MILLIS).toInt()
+    }
+
+    fun getUserAge(dob: Long): String {
+        return ConnectedUtils.getNumberOfYearsBetweenTwoDates(System.currentTimeMillis(), dob)
+            .toString() + " " + ConnectedApp.appContext.getString(R.string.years)
     }
 
     fun booleanToInt(boolean: Boolean): Int {

@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.connected.R
 import com.example.connected.app.ConnectedApp
 import com.example.connected.authentication.UserAuthenticationViewModel
@@ -16,6 +19,7 @@ import com.example.connected.base.BaseActivity
 import com.example.connected.databinding.ActivityHomeBinding
 import com.example.connected.databinding.LoginFormBinding
 import com.example.connected.databinding.RegisterFormBinding
+import com.example.connected.models.User
 import com.example.connected.utils.ConnectedUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -34,7 +38,9 @@ class HomeActivity : BaseActivity() {
     private val registerFormBinding: RegisterFormBinding by lazy {
         RegisterFormBinding.inflate(layoutInflater)
     }
+    private val homeAdapter = HomeAdapter()
 
+    private var users: MutableList<User> = ArrayList()
     private var currentSelectedDate: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +49,19 @@ class HomeActivity : BaseActivity() {
         setContentView(activityHomeBinding.root)
         initToolbar(activityHomeBinding.toolbar, resources.getString(R.string.title_home))
         initNavBar(activityHomeBinding.navBar, 0)
+        initRecyclerView()
         setObservers()
+        homeViewModel.getUsers()
+    }
+
+    private fun initRecyclerView() {
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 2)
+        activityHomeBinding.rvUsers.apply {
+            this.layoutManager = layoutManager
+            addItemDecoration(HomePageItemDecoration(5, 2))
+            itemAnimator = DefaultItemAnimator()
+            adapter = homeAdapter
+        }
     }
 
     override fun onStart() {
@@ -51,7 +69,6 @@ class HomeActivity : BaseActivity() {
 
         ConnectedApp.auth.currentUser?.let {
             userAuthenticationViewModel.userIsLoggedIn.value = true
-            userAuthenticationViewModel.loading.value = false
         } ?: showLoginPopUp()
     }
 
@@ -185,11 +202,22 @@ class HomeActivity : BaseActivity() {
                 registerFormBinding.tvError.text = error
                 registerFormBinding.progressbar.visibility = View.GONE
             })
-            it.loading.observe(this, {
-                if (it) {
+        }
+        homeViewModel.let {
+            it.users.observe(this, { users ->
+                this.users = users
+                homeAdapter.setUsers(users)
+                homeAdapter.notifyDataSetChanged()
+            })
+            it.error.observe(this, {
+                // handle error
+            })
+            it.loading.observe(this, { loading ->
+                if (loading) {
                     activityHomeBinding.homeProgressBar.visibility = View.VISIBLE
                 } else {
                     activityHomeBinding.homeProgressBar.visibility = View.GONE
+                    activityHomeBinding.tvYmk.visibility = View.VISIBLE
                 }
             })
         }
