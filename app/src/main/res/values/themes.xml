@@ -16,5 +16,9 @@
 
         <!-- disable animation on activity launch -->
         <item name="android:windowAnimationStyle">@null</item>
+
+        <!-- toolbar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>

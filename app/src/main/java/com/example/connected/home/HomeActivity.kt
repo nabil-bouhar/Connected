@@ -46,9 +46,11 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(activityHomeBinding.root)
-        initToolbar(activityHomeBinding.toolbar, resources.getString(R.string.title_home))
-        initNavBar(activityHomeBinding.navBar, 0)
+        if (savedInstanceState == null) {
+            setContentView(activityHomeBinding.root)
+            initToolbar(activityHomeBinding.toolbar, resources.getString(R.string.title_home))
+            initNavBar(activityHomeBinding.navBar, 0)
+        }
         initRecyclerView()
         setObservers()
         homeViewModel.getUsers()
@@ -70,6 +72,11 @@ class HomeActivity : BaseActivity() {
         ConnectedApp.auth.currentUser?.let {
             userAuthenticationViewModel.userIsLoggedIn.value = true
         } ?: showLoginPopUp()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        authenticationDialog.dismiss()
     }
 
     private fun showLoginPopUp() {
