@@ -1,22 +1,22 @@
-package com.example.connected.home
+package com.example.connected.relations.following
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.connected.databinding.UserCardHomeBinding
+import com.example.connected.databinding.UserItemRealtionsBinding
 import com.example.connected.models.User
 import com.example.connected.utils.ConnectedUtils
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class FollowingAdapter @Inject constructor() : RecyclerView.Adapter<FollowingAdapter.ViewHolder>() {
 
     var onItemClick: ((User) -> Unit)? = null
     private var users: MutableList<User> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
-        val binding =
-            UserCardHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingAdapter.ViewHolder {
+        val binding = UserItemRealtionsBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -26,7 +26,7 @@ class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.ViewHo
 
     override fun getItemCount(): Int = users.size
 
-    inner class ViewHolder(private val binding: UserCardHomeBinding) :
+    inner class ViewHolder(private val binding: UserItemRealtionsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -37,7 +37,7 @@ class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.ViewHo
 
         fun bind(user: User) {
             binding.apply {
-                tvDisplayName.text = user.pseudo
+                tvPseudo.text = user.pseudo
                 binding.tvAge.text = ConnectedUtils.getUserAge(user.birthDate!!)
                 binding.tvLocation.text = user.city
                 if (user.photo != "default") {

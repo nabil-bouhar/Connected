@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"
+        layout="@layout/base_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/content_description_end_icon"
             android:padding="5dp"
-            android:src="@drawable/ic_edit_profile__svgrepo_com"
+            android:src="@drawable/ic_user_edit_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +68,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/content_description_end_icon"
             android:padding="5dp"
-            android:src="@drawable/ic_baseline_language_24"
+            android:src="@drawable/ic_baseline_language_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -109,7 +109,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/content_description_end_icon"
             android:padding="5dp"
-            android:src="@drawable/ic_dark_mode_svgrepo_com"
+            android:src="@drawable/ic_dark_mode_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -162,7 +162,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/content_description_end_icon"
             android:padding="5dp"
-            android:src="@drawable/ic_baseline_alternate_email_24"
+            android:src="@drawable/ic_contact_us_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -203,7 +203,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/content_description_end_icon"
             android:padding="5dp"
-            android:src="@drawable/ic_terms_and_conditions"
+            android:src="@drawable/ic_terms_and_conditions_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -244,7 +244,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/content_description_end_icon"
             android:padding="5dp"
-            android:src="@drawable/ic_log_out_svgrepo_com"
+            android:src="@drawable/ic_log_out_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

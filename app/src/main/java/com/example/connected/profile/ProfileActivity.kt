@@ -91,7 +91,7 @@ class ProfileActivity : BaseActivity() {
                     }
                 }
             })
-            it.userInfo.observe(this, { user ->
+            it.currentUserInfo.observe(this, { user ->
                 displayUserInfo(user)
             })
             it.error.observe(this, { error ->

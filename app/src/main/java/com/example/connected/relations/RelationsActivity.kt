@@ -1,55 +1,72 @@
 package com.example.connected.relations
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.example.connected.R
 import com.example.connected.app.ConnectedApp
 import com.example.connected.base.BaseActivity
 import com.example.connected.databinding.ActivityRelationsBinding
-import com.google.android.material.tabs.TabLayoutMediator
-
-val titles = arrayOf(
-    ConnectedApp.appContext.getString(R.string.following),
-    ConnectedApp.appContext.getString(R.string.followers),
-    ConnectedApp.appContext.getString(R.string.friends)
-)
-val icons = arrayOf(
-    R.drawable.ic_following_24,
-    R.drawable.ic_followers_24,
-    R.drawable.ic_friends_24
-)
+import com.google.android.material.tabs.TabLayout
 
 class RelationsActivity : BaseActivity() {
 
-    private lateinit var relationsViewModel: RelationsViewModel
-    private lateinit var binding: ActivityRelationsBinding
+    private lateinit var activityRelationsBinding: ActivityRelationsBinding
+    private lateinit var relationsViewPagerAdapter: RelationsViewPagerAdapter
+    private val relationsViewModel: RelationsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRelationsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        activityRelationsBinding = ActivityRelationsBinding.inflate(layoutInflater)
+        setContentView(activityRelationsBinding.root)
 
-        initToolbar(binding.toolbar, resources.getString(R.string.title_relations))
-        initNavBar(binding.navBar, 2)
+        initToolbar(activityRelationsBinding.toolbar, resources.getString(R.string.title_relations))
+        initNavBar(activityRelationsBinding.navBar, 2)
         initRelationsTabLayout()
+        relationsViewModel.getUserInfo()
+        setObservers()
+    }
 
-        relationsViewModel = ViewModelProvider(this)[RelationsViewModel::class.java]
+    private fun setObservers() {
+        relationsViewModel.let {
+            it.currentUserInfo.observe(this, { user ->
+                user?.let {
+                    relationsViewPagerAdapter.setCurrentUserAndRelationsInfo(user)
+                    relationsViewPagerAdapter.onReceivedUserInfo(user)
+                }
+            })
+            it.error.observe(this, { error ->
+                relationsViewPagerAdapter.setError(error)
+            })
+        }
     }
 
     private fun initRelationsTabLayout() {
 
-        val viewPager = binding.vpRelations
-        val tabLayout = binding.tlRelations
-        val adapter = RelationsViewPagerAdapter(supportFragmentManager, lifecycle)
+        val viewPager = activityRelationsBinding.vpRelations
+        val tabLayout = activityRelationsBinding.tlRelations
 
-        viewPager.adapter = adapter
+        relationsViewPagerAdapter = RelationsViewPagerAdapter(supportFragmentManager, lifecycle)
+        viewPager.adapter = relationsViewPagerAdapter
 
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = titles[position]
-            tab.icon = ContextCompat.getDrawable(this, icons[position])
-        }.attach()
+        tabLayout.apply {
+            addTab(tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.following)))
+            addTab(tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.followers)))
+            addTab(tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.friends)))
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    viewPager.currentItem = tab.position
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    // Nothing for the moment
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab) {
+                    // Nothing for the moment
+                }
+            })
+        }
     }
 }

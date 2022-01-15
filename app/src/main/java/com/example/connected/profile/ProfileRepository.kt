@@ -18,22 +18,27 @@ class ProfileRepository : BaseRepository() {
         }
     }
 
-    fun getUserDataFromFireStore(userInfoCallBack: UserInfoCallBack) {
-        getCollection(USERS_COLLECTION).document(getCurrentUserUid()!!).get()
-            .continueWith { it.result?.toObject(User::class.java) }.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    userInfoCallBack.onReceivedUserInfo(it.result!!)
-                } else {
-                    userInfoCallBack.onErrorReceivingUserInfo(
-                        it.exception?.message
-                            ?: ConnectedApp.appContext.getString(R.string.unknown_error)
-                    )
-                }
+    fun getUserDataFromFireStore(userId: String?, userInfoCallBack: UserInfoCallBack) {
+        getCollection(USERS_COLLECTION).document(userId ?: getCurrentUserUid()!!).get()
+            .continueWith { it.result?.toObject(User::class.java) }
+
+            .addOnSuccessListener { user ->
+                userId?.let {
+                    userInfoCallBack.onReceivedUserInfo(user!!)
+                } ?: userInfoCallBack.onReceivedCurrentUserInfo(user!!)
+            }
+
+            .addOnFailureListener {
+                userInfoCallBack.onErrorReceivingUserInfo(
+                    it.message
+                        ?: ConnectedApp.appContext.getString(R.string.unknown_error)
+                )
             }
     }
 
-    fun updateProfileStatusInFireStore(status: String, userInfoCallBack: UserInfoCallBack) {
+    fun updateUserStatusInFireStore(status: String, userInfoCallBack: UserInfoCallBack) {
         getCollection(USERS_COLLECTION).document(getCurrentUserUid()!!).update("about", status)
+
             .addOnSuccessListener {
                 userInfoCallBack.onUpdatedUserStatus()
             }
@@ -46,8 +51,53 @@ class ProfileRepository : BaseRepository() {
             }
     }
 
+    fun updateUserRelationsInFireStore(
+        userId: String,
+        following: MutableList<String>?,
+        followers: MutableList<String>?,
+        friends: MutableList<String>?,
+        userInfoCallBack: UserInfoCallBack
+    ) {
+        getCollection(USERS_COLLECTION).document(userId).update(
+            "following", following,
+            "followers", followers,
+            "friends", friends
+        )
+
+            .addOnSuccessListener {
+                if (userId != ConnectedApp.auth.currentUser?.uid!!) userInfoCallBack.onUpdatedUserRelations()
+            }
+
+            .addOnFailureListener {
+                userInfoCallBack.onErrorUpdatingUserRelations(
+                    it.message
+                        ?: ConnectedApp.appContext.getString(R.string.unknown_error)
+                )
+            }
+    }
+
+    fun updateUserLikesInFireStore(
+        userId: String,
+        likes: MutableList<String>?,
+        userInfoCallBack: UserInfoCallBack
+    ) {
+        getCollection(USERS_COLLECTION).document(userId).update("likes", likes)
+
+            .addOnSuccessListener {
+                userInfoCallBack.onUpdatedUserLikes()
+            }
+
+            .addOnFailureListener {
+                userInfoCallBack.onErrorUpdatingUserLikes(
+                    it.message
+                        ?: ConnectedApp.appContext.getString(R.string.unknown_error)
+                )
+            }
+    }
+
     private fun updateImageUrlInFireStore(imageUrl: String, userInfoCallBack: UserInfoCallBack) {
         getCollection(USERS_COLLECTION).document(getCurrentUserUid()!!).update("photo", imageUrl)
+
             .addOnSuccessListener {
                 userInfoCallBack.onUpdatedUserProfilePicture()
             }
@@ -64,6 +114,7 @@ class ProfileRepository : BaseRepository() {
         val fileName = getCurrentUserUid() + ".jpg"
         FirebaseStorage.getInstance().reference.child("images/$fileName")
             .putFile(image)
+
             .addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     updateImageUrlInFireStore(it.toString(), userInfoCallBack)

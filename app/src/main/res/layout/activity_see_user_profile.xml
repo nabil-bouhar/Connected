@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".profile.ProfileActivity">
+    tools:context=".profile.SeeUserProfileActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -13,13 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/profile_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="150dp"
-        android:indeterminateTint="?attr/baseColor" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,12 +25,12 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_edit_profile_picture"
+                android:id="@+id/iv_profile_menu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="25dp"
                 android:contentDescription="@string/profile_picture"
-                android:src="@drawable/ic_edit_picture"
+                android:src="@drawable/ic_profile_menu_50"
                 app:layout_constraintStart_toEndOf="@+id/iv_profile_picture"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,8 +63,9 @@
                 android:id="@+id/tv_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="24dp"
-                android:gravity="center"
+                android:gravity="bottom"
                 android:textSize="18sp"
                 app:drawableStartCompat="@drawable/ic_birthday_cake_24"
                 app:layout_constraintStart_toStartOf="@id/tv_display_name"
@@ -81,6 +75,7 @@
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="24dp"
                 android:drawableStart="@drawable/ic_location_24"
                 android:textSize="18sp"
@@ -103,7 +98,14 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:contentDescription="@string/content_description_end_icon"
-                        android:src="@drawable/ic_like_icon_full" />
+                        android:src="@drawable/ic_like_icon_empty" />
+
+                    <ImageView
+                        android:id="@+id/iv_followers"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:contentDescription="@string/content_description_end_icon"
+                        android:src="@drawable/ic_user_follow" />
 
                     <ImageView
                         android:id="@+id/iv_following"
@@ -111,13 +113,6 @@
                         android:layout_height="30dp"
                         android:contentDescription="@string/content_description_end_icon"
                         android:src="@drawable/ic_user_following_50" />
-
-                    <ImageView
-                        android:id="@+id/iv_followers"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:contentDescription="@string/content_description_end_icon"
-                        android:src="@drawable/ic_user_followers_50" />
 
                     <ImageView
                         android:id="@+id/iv_friends"
@@ -136,12 +131,12 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_following"
+                        android:id="@+id/tv_followers"
                         android:layout_gravity="center"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_followers"
+                        android:id="@+id/tv_following"
                         android:layout_gravity="center"
                         android:textStyle="bold" />
 
@@ -162,15 +157,15 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_following_label"
-                        android:layout_gravity="center"
-                        android:text="@string/following"
-                        android:textStyle="bold" />
-
-                    <TextView
                         android:id="@+id/tv_followers_label"
                         android:layout_gravity="center"
                         android:text="@string/followers"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_following_label"
+                        android:layout_gravity="center"
+                        android:text="@string/following"
                         android:textStyle="bold" />
 
                     <TextView
@@ -181,67 +176,26 @@
                 </TableRow>
             </TableLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_view_about"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/tl_relations">
+                android:text="@string/about_default_message"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/tl_relations" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_about"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/about_default_message"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toBottomOf="@id/tl_relations" />
-
-                <ImageView
-                    android:id="@+id/iv_edit_about"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/profile_picture"
-                    android:src="@drawable/ic_edit_50" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_edit_about"
+            <Button
+                android:id="@+id/btn_contact"
+                style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/ll_view_about">
-
-                <EditText
-                    android:id="@+id/et_about"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:autofillHints="name"
-                    android:inputType="text" />
-
-                <ImageView
-                    android:id="@+id/iv_save_about"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:contentDescription="@string/profile_picture"
-                    android:src="@drawable/ic_save_24" />
-
-                <ImageView
-                    android:id="@+id/iv_cancel_about"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/profile_picture"
-                    android:src="@drawable/ic_cancel_50" />
-            </LinearLayout>
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="?attr/baseColor"
+                android:text="@string/contact"
+                app:icon="@drawable/ic_contact_30"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

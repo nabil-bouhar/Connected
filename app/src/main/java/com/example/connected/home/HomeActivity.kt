@@ -1,6 +1,7 @@
 package com.example.connected.home
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcel
 import android.text.InputType
@@ -8,6 +9,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,9 +22,14 @@ import com.example.connected.databinding.ActivityHomeBinding
 import com.example.connected.databinding.LoginFormBinding
 import com.example.connected.databinding.RegisterFormBinding
 import com.example.connected.models.User
+import com.example.connected.profile.SeeUserProfileActivity
 import com.example.connected.utils.ConnectedUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.Gson
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class HomeActivity : BaseActivity() {
 
@@ -51,9 +58,21 @@ class HomeActivity : BaseActivity() {
             initToolbar(activityHomeBinding.toolbar, resources.getString(R.string.title_home))
             initNavBar(activityHomeBinding.navBar, 0)
         }
+        homeAdapter.onItemClick = { user ->
+            seeUserProfileActivity(user)
+        }
         initRecyclerView()
         setObservers()
         homeViewModel.getUsers()
+    }
+
+    private fun seeUserProfileActivity(user: User) {
+        startActivity(
+            Intent(this, SeeUserProfileActivity::class.java).putExtra(
+                "user",
+                user
+            )
+        )
     }
 
     private fun initRecyclerView() {

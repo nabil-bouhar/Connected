@@ -22,9 +22,9 @@ class UserAuthenticationRepository : BaseRepository() {
         getCurrentUserUid()?.let {
             getCollection(USERS_COLLECTION).document(it).set(user).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    userAuthenticationCallBack.onUserLogInSuccessful(it)
+                    userAuthenticationCallBack.onUserSignUpSuccessful(it)
                 } else {
-                    userAuthenticationCallBack.onUserLogInError(
+                    userAuthenticationCallBack.onUserSignUpError(
                         task.exception?.message
                             ?: ConnectedApp.appContext.getString(R.string.unknown_error)
                     )

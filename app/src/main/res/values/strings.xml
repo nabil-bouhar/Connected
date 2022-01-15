@@ -58,4 +58,8 @@
     <string name="years">Years</string>
     <string name="select_photo_intent_title">Please select a photo</string>
     <string name="you_may_know">You May know</string>
+    <string name="contact">Contact</string>
+    <string name="no_followers">Empty followers list !</string>
+    <string name="no_following">Empty following list !</string>
+    <string name="no_friends">Empty friends list !</string>
 </resources>

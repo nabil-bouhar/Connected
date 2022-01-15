@@ -53,7 +53,7 @@ object ConnectedUtils {
         toastMessage: String?
     ) {
 
-        val shouldWaitToDisplayToastMessage: Long = if (toastMessage != null) 500 else 0
+        val waitingTimeToDisplayToastMessage: Long = if (toastMessage != null) 500 else 0
 
         toastMessage?.let {
             Toast.makeText(context, it, Toast.LENGTH_SHORT)
@@ -64,12 +64,11 @@ object ConnectedUtils {
             {
                 // clear activities stack to update data !
                 Intent(context, destination).let {
-                    it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    it.flags =
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     context.startActivity(it)
                 }
-            }, shouldWaitToDisplayToastMessage
+            }, waitingTimeToDisplayToastMessage
         )
     }
 

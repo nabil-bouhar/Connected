@@ -18,12 +18,15 @@ class HomeRepository : BaseRepository() {
     fun loadUsersListFromFireStore(usersCallback: UsersCallback) {
         val usersList: MutableList<User> = ArrayList()
         getCollection(USERS_COLLECTION).get()
+
             .addOnSuccessListener { users ->
-                users.forEach {
-                    usersList.add(it.toObject(User::class.java))
+                users.forEach { queryDocumentSnapshot ->
+                    val user: User = queryDocumentSnapshot.toObject(User::class.java)
+                    if (user.userId != getCurrentUserUid()) usersList.add(user)
                 }
                 usersCallback.onReceivedUsersList(usersList)
             }
+
             .addOnFailureListener {
                 usersCallback.onErrorReceivingUsersList(
                     it.message

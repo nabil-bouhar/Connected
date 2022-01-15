@@ -1,5 +1,9 @@
 package com.example.connected.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     val userId: String,
     val gender: Int?,
@@ -16,7 +20,7 @@ data class User(
     val following: MutableList<String>?,
     val followers: MutableList<String>?,
     val friends: MutableList<String>?
-) {
+) : Parcelable {
     // no args constructor is needed to deserialize Firestore DocumentSnapshot to local User object
     constructor() : this(
         "",

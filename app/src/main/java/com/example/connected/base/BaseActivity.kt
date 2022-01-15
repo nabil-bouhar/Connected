@@ -4,6 +4,7 @@ package com.example.connected.base
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.connected.R
+import com.example.connected.databinding.BaseToolbarBinding
 import com.example.connected.databinding.BottomNavigationBarBinding
 import com.example.connected.databinding.ToolbarBinding
 import com.example.connected.home.HomeActivity
@@ -17,6 +18,11 @@ open class BaseActivity : AppCompatActivity() {
     protected fun initToolbar(toolbarBinding: ToolbarBinding, toolBarTitle: String) {
         toolbarBinding.toolbarTitle.text = toolBarTitle
         setSupportActionBar(toolbarBinding.toolbar)
+    }
+
+    protected fun initToolbar(baseToolbarBinding: BaseToolbarBinding, toolBarTitle: String) {
+        baseToolbarBinding.toolbarTitle.text = toolBarTitle
+        setSupportActionBar(baseToolbarBinding.toolbar)
     }
 
     protected fun initNavBar(bottomNavigationBarBinding: BottomNavigationBarBinding, itemId: Int) {

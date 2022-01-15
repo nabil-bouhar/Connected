@@ -10,12 +10,14 @@ class ProfileViewModel : ViewModel(), UserInfoCallBack {
     private val profileRepository = ProfileRepository.getInstance()
     private val userInfoCallBack: UserInfoCallBack = this
 
+    var currentUserInfo: MutableLiveData<User> = MutableLiveData()
     var userInfo: MutableLiveData<User> = MutableLiveData()
     val loading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val dataShouldBeUpdated: MutableLiveData<Boolean> = MutableLiveData()
     val error: MutableLiveData<String> = MutableLiveData()
 
     fun getUserData() {
-        profileRepository.getUserDataFromFireStore(userInfoCallBack)
+        profileRepository.getUserDataFromFireStore(null, userInfoCallBack)
     }
 
     fun updateProfilePicture(image: Uri) {
@@ -23,13 +25,44 @@ class ProfileViewModel : ViewModel(), UserInfoCallBack {
     }
 
     fun updateProfileStatus(status: String) {
-        profileRepository.updateProfileStatusInFireStore(status, userInfoCallBack)
+        profileRepository.updateUserStatusInFireStore(status, userInfoCallBack)
+    }
+
+    fun updateUserRelations(
+        userId: String,
+        following: MutableList<String>?,
+        followers: MutableList<String>?,
+        friends: MutableList<String>?
+    ) {
+        profileRepository.updateUserRelationsInFireStore(
+            userId,
+            following,
+            followers,
+            friends,
+            userInfoCallBack
+        )
+    }
+
+    fun updateUserLikes(
+        userId: String,
+        likes: MutableList<String>?
+    ) {
+        profileRepository.updateUserLikesInFireStore(
+            userId,
+            likes,
+            userInfoCallBack
+        )
+    }
+
+    override fun onReceivedCurrentUserInfo(user: User) {
+        currentUserInfo.value = user
+        loading.value = false
+
     }
 
     override fun onReceivedUserInfo(user: User) {
         userInfo.value = user
         loading.value = false
-
     }
 
     override fun onErrorReceivingUserInfo(errorMessage: String) {
@@ -50,6 +83,22 @@ class ProfileViewModel : ViewModel(), UserInfoCallBack {
     }
 
     override fun onErrorUpdatingUserStatus(errorMessage: String) {
+        // Nothing for the moment !
+    }
+
+    override fun onUpdatedUserRelations() {
+        dataShouldBeUpdated.value = true
+    }
+
+    override fun onErrorUpdatingUserRelations(errorMessage: String) {
+        // Nothing for the moment !
+    }
+
+    override fun onUpdatedUserLikes() {
+        dataShouldBeUpdated.value = true
+    }
+
+    override fun onErrorUpdatingUserLikes(errorMessage: String) {
         // Nothing for the moment !
     }
 }

@@ -14,10 +14,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
-        android:backgroundTint="?attr/baseColor"
         android:id="@+id/tl_relations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="?attr/baseColor"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:tabGravity="center"
         app:tabMode="fixed"
@@ -26,9 +26,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_relations"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/tl_relations" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tl_relations" />
 
     <include
         android:id="@+id/nav_bar"
