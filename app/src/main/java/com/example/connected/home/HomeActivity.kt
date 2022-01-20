@@ -9,8 +9,6 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,26 +24,17 @@ import com.example.connected.profile.SeeUserProfileActivity
 import com.example.connected.utils.ConnectedUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.gson.Gson
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
+import org.koin.android.ext.android.inject
 
 class HomeActivity : BaseActivity() {
 
-    private val homeViewModel: HomeViewModel by viewModels()
-    private val activityHomeBinding: ActivityHomeBinding by lazy {
-        ActivityHomeBinding.inflate(layoutInflater)
-    }
-    private val userAuthenticationViewModel: UserAuthenticationViewModel by viewModels()
+    private lateinit var activityHomeBinding: ActivityHomeBinding
+    private lateinit var registerFormBinding: RegisterFormBinding
+    private lateinit var loginFormBinding: LoginFormBinding
     private val authenticationDialog: Dialog by lazy { Dialog(this) }
-    private val loginFormBinding: LoginFormBinding by lazy {
-        LoginFormBinding.inflate(layoutInflater)
-    }
-    private val registerFormBinding: RegisterFormBinding by lazy {
-        RegisterFormBinding.inflate(layoutInflater)
-    }
     private val homeAdapter = HomeAdapter()
+    private val userAuthenticationViewModel: UserAuthenticationViewModel by inject()
+    private val homeViewModel: HomeViewModel by inject()
 
     private var users: MutableList<User> = ArrayList()
     private var currentSelectedDate: Long? = null
@@ -54,6 +43,9 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
+            activityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
+            registerFormBinding = RegisterFormBinding.inflate(layoutInflater)
+            loginFormBinding = LoginFormBinding.inflate(layoutInflater)
             setContentView(activityHomeBinding.root)
             initToolbar(activityHomeBinding.toolbar, resources.getString(R.string.title_home))
             initNavBar(activityHomeBinding.navBar, 0)

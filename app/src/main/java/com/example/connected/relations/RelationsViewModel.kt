@@ -4,8 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.connected.models.User
 
-class RelationsViewModel : ViewModel(), UserInfoCallBack {
-    private val relationsRepository = RelationsRepository.getInstance()
+class RelationsViewModel(private val relationsRepository: RelationsRepository) : ViewModel(),
+    UserInfoCallBack {
+
     private val userInfoCallBack: UserInfoCallBack = this
 
     val currentUserInfo: MutableLiveData<User> = MutableLiveData()

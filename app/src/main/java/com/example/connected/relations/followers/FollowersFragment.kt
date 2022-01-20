@@ -8,18 +8,19 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.connected.R
 import com.example.connected.databinding.FollowersFragmentBinding
 import com.example.connected.models.User
 import com.example.connected.profile.SeeUserProfileActivity
+import org.koin.android.ext.android.inject
 
 class FollowersFragment : Fragment() {
 
-    private lateinit var followersViewModel: FollowersViewModel
+    private val followersViewModel: FollowersViewModel by inject()
     private lateinit var followersFragmentBinding: FollowersFragmentBinding
     private val followersAdapter = FollowersAdapter()
+
     lateinit var followersIds: MutableList<String>
 
     override fun onCreateView(
@@ -29,7 +30,6 @@ class FollowersFragment : Fragment() {
 
         followersFragmentBinding = FollowersFragmentBinding.inflate(layoutInflater)
 
-        followersViewModel = ViewModelProvider(this)[FollowersViewModel::class.java]
         followersAdapter.onItemClick = { user ->
             seeUserProfileActivity(user)
         }

@@ -1,14 +1,12 @@
 package com.example.connected.home
 
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.connected.models.User
 
-class HomeViewModel : ViewModel(), HomeRepository.UsersCallback {
+class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(),
+    HomeRepository.UsersCallback {
 
-    private val homeRepository = HomeRepository.getInstance()
     private val usersCallback = this
 
     var users: MutableLiveData<MutableList<User>> = MutableLiveData()

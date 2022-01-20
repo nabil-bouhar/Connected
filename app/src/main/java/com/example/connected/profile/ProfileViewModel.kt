@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.connected.models.User
 
-class ProfileViewModel : ViewModel(), UserInfoCallBack {
+class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewModel(), UserInfoCallBack {
 
-    private val profileRepository = ProfileRepository.getInstance()
     private val userInfoCallBack: UserInfoCallBack = this
 
     var currentUserInfo: MutableLiveData<User> = MutableLiveData()

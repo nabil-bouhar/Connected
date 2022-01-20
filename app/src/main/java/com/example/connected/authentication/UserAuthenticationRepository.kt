@@ -7,14 +7,6 @@ import com.example.connected.models.User
 
 class UserAuthenticationRepository : BaseRepository() {
 
-    companion object {
-        private val REPO_INSTANCE: UserAuthenticationRepository = UserAuthenticationRepository()
-
-        fun getInstance(): UserAuthenticationRepository {
-            return REPO_INSTANCE
-        }
-    }
-
     private fun createUserInFireStore(
         user: User,
         userAuthenticationCallBack: UserAuthenticationCallBack

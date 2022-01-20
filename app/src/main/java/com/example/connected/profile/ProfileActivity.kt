@@ -8,7 +8,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.example.connected.R
 import com.example.connected.base.BaseActivity
@@ -16,13 +15,13 @@ import com.example.connected.databinding.ActivityProfileBinding
 import com.example.connected.models.User
 import com.example.connected.utils.ConnectedUtils
 import com.squareup.picasso.Picasso
+import org.koin.android.ext.android.inject
 
 class ProfileActivity : BaseActivity() {
 
-    private val activityProfileBinding: ActivityProfileBinding by lazy {
-        ActivityProfileBinding.inflate(layoutInflater)
-    }
-    private val profileViewModel: ProfileViewModel by viewModels()
+    private lateinit var activityProfileBinding: ActivityProfileBinding
+    private val profileViewModel: ProfileViewModel by inject()
+
     private val startForResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
@@ -36,6 +35,7 @@ class ProfileActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        activityProfileBinding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(activityProfileBinding.root)
 
         initToolbar(activityProfileBinding.toolbar, resources.getString(R.string.title_profile))

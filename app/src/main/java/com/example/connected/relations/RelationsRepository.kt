@@ -7,14 +7,6 @@ import com.example.connected.models.User
 
 class RelationsRepository : BaseRepository() {
 
-    companion object {
-        private val REPO_INSTANCE: RelationsRepository = RelationsRepository()
-
-        fun getInstance(): RelationsRepository {
-            return REPO_INSTANCE
-        }
-    }
-
     fun getUserInfoFromFireStore(userInfoCallBack: UserInfoCallBack) {
         getCollection(USERS_COLLECTION).document(getCurrentUserUid()!!).get()
             .continueWith { it.result?.toObject(User::class.java) }

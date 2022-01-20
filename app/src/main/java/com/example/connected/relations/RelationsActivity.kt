@@ -1,18 +1,18 @@
 package com.example.connected.relations
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import com.example.connected.R
 import com.example.connected.app.ConnectedApp
 import com.example.connected.base.BaseActivity
 import com.example.connected.databinding.ActivityRelationsBinding
 import com.google.android.material.tabs.TabLayout
+import org.koin.android.ext.android.inject
 
 class RelationsActivity : BaseActivity() {
 
     private lateinit var activityRelationsBinding: ActivityRelationsBinding
     private lateinit var relationsViewPagerAdapter: RelationsViewPagerAdapter
-    private val relationsViewModel: RelationsViewModel by viewModels()
+    private val relationsViewModel: RelationsViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -51,8 +51,12 @@ class RelationsActivity : BaseActivity() {
         viewPager.adapter = relationsViewPagerAdapter
 
         tabLayout.apply {
-            addTab(tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.following)))
-            addTab(tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.followers)))
+            addTab(
+                tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.following))
+            )
+            addTab(
+                tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.followers))
+            )
             addTab(tabLayout.newTab().setText(ConnectedApp.appContext.getString(R.string.friends)))
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {

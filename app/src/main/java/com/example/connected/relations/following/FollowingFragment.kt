@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.connected.R
 import com.example.connected.databinding.FollowingFragmentBinding
 import com.example.connected.models.User
 import com.example.connected.profile.SeeUserProfileActivity
+import org.koin.android.ext.android.inject
 
 class FollowingFragment : Fragment() {
 
-    private lateinit var followingViewModel: FollowingViewModel
+    private val followingViewModel: FollowingViewModel by inject()
     private lateinit var followingFragmentBinding: FollowingFragmentBinding
     private val followingAdapter = FollowingAdapter()
 
@@ -26,7 +26,6 @@ class FollowingFragment : Fragment() {
 
         followingFragmentBinding = FollowingFragmentBinding.inflate(layoutInflater)
 
-        followingViewModel = ViewModelProvider(this)[FollowingViewModel::class.java]
         followingAdapter.onItemClick = { user ->
             seeUserProfileActivity(user)
         }

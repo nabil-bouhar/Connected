@@ -7,14 +7,6 @@ import com.example.connected.models.User
 
 class HomeRepository : BaseRepository() {
 
-    companion object {
-        private val REPO_INSTANCE: HomeRepository = HomeRepository()
-
-        fun getInstance(): HomeRepository {
-            return REPO_INSTANCE
-        }
-    }
-
     fun loadUsersListFromFireStore(usersCallback: UsersCallback) {
         val usersList: MutableList<User> = ArrayList()
         getCollection(USERS_COLLECTION).get()

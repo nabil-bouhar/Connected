@@ -7,16 +7,7 @@ import com.example.connected.base.BaseRepository
 import com.example.connected.models.User
 import com.google.firebase.storage.FirebaseStorage
 
-
 class ProfileRepository : BaseRepository() {
-
-    companion object {
-        private val REPO_INSTANCE: ProfileRepository = ProfileRepository()
-
-        fun getInstance(): ProfileRepository {
-            return REPO_INSTANCE
-        }
-    }
 
     fun getUserDataFromFireStore(userId: String?, userInfoCallBack: UserInfoCallBack) {
         getCollection(USERS_COLLECTION).document(userId ?: getCurrentUserUid()!!).get()

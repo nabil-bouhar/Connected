@@ -4,14 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.connected.R
 import com.example.connected.app.ConnectedApp
+import com.example.connected.authentication.UserAuthenticationRepository.UserAuthenticationCallBack
 import com.example.connected.utils.ConnectedUtils
 
-class UserAuthenticationViewModel : ViewModel(),
-    UserAuthenticationRepository.UserAuthenticationCallBack {
+class UserAuthenticationViewModel(private val userAuthenticationRepository: UserAuthenticationRepository) :
+    ViewModel(), UserAuthenticationCallBack {
 
-    private val userAuthenticationRepository = UserAuthenticationRepository.getInstance()
-    private val userAuthenticationCallBack: UserAuthenticationRepository.UserAuthenticationCallBack =
-        this
+    private val userAuthenticationCallBack: UserAuthenticationCallBack = this
 
     var userIsLoggedIn: MutableLiveData<Boolean> = MutableLiveData(false)
     var loginError: MutableLiveData<String> = MutableLiveData()

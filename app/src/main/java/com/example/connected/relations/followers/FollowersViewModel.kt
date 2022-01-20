@@ -5,9 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.example.connected.models.User
 import com.example.connected.relations.RelationsRepository
 
-class FollowersViewModel : ViewModel(), RelationsRepository.UsersListCallback {
-
-    private val relationRepository = RelationsRepository.getInstance()
+class FollowersViewModel(private val relationRepository: RelationsRepository) : ViewModel(),
+    RelationsRepository.UsersListCallback {
 
     val followers: MutableLiveData<MutableList<User>> = MutableLiveData()
     val error: MutableLiveData<String> = MutableLiveData()

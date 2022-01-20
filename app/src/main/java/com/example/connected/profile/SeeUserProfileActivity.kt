@@ -3,7 +3,6 @@ package com.example.connected.profile
 import android.content.Intent
 import android.content.Intent.*
 import android.os.Bundle
-import androidx.activity.viewModels
 import com.example.connected.R
 import com.example.connected.app.ConnectedApp
 import com.example.connected.base.BaseActivity
@@ -11,11 +10,13 @@ import com.example.connected.databinding.ActivitySeeUserProfileBinding
 import com.example.connected.models.User
 import com.example.connected.utils.ConnectedUtils
 import com.squareup.picasso.Picasso
+import org.koin.android.ext.android.inject
 
 class SeeUserProfileActivity : BaseActivity() {
 
     private lateinit var activitySeeUserProfileBinding: ActivitySeeUserProfileBinding
-    private val profileViewModel: ProfileViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by inject()
+
     private lateinit var user: User
     private var currentUser: User? = null
 
